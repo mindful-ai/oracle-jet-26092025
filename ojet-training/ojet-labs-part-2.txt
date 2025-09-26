@@ -1,0 +1,49 @@
+-----------------------------------------------------------------------------------
+LAB 8: Working with oj-table component
+-----------------------------------------------------------------------------------
+Objective:
+To study the features of oj-table component
+
+
+Part 1: Implementation
+-----------------------------------------------------------------------------------
+
+View:
+Access https://docs.oracle.com/en/middleware/developer-tools/jet/7.2/develop/whats-new-this-guide-release-7.2.0.html
+copy the <oj-table></oj-table>
+
+ViewModel:
+
+Required Modules:
+"knockout", "ojs/ojarraydataprovider", "ojs/ojtable"
+
+1. Use tabledata.txt to create the array required for the table: say self.deptArray
+2. Wrap the data in ArrayDataProvider and feed it to oj-table
+   self.dataProvider = new ArrayDataProvider(self.deptArray, {keyAttributes: 'DepartmentId'});
+
+Part 2: Making the table sortable
+-----------------------------------------------------------------------------------
+
+View:
+Use "sortable": "enabled" in DepartmentName column
+
+Part 3: Adding Pagination
+-----------------------------------------------------------------------------------
+
+View:
+
+Add at the bottom of the table:
+    <oj-paging-control id="paging" data='[[]]' page-size='5' slot='bottom'>
+    </oj-paging-control>
+
+ViewModel:
+
+Required Modules:
+"ojs/ojpagingcontrol", "ojs/ojpagingdataproviderview"
+
+Wrap the ArrayDataProvider with PagingDataProviderView and feed it to data attribute 
+of the paging controller and the table as well
+    self.pagingDataProvider =  new PagingDataProviderView(new ArrayDataProvider(self.deptArray, {keyAttributes: 'DepartmentId'}));
+
+
+Update the view with pagingDataProvider for data attribute in oj-table and oj-paging-control
